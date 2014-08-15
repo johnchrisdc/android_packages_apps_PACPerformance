@@ -5,7 +5,7 @@
     <string name="no_root">Kein Root Zugriff</string>
     <string name="no_busybox">Busybox ist nicht installiert</string>
     <string name="set_on_boot">Nach starten übernehmen</string>
-    <string name="booted_up">%s is gestartet</string>
+    <string name="booted_up">%s hat ihre Werte übernohmen</string>
     <string name="loading">Lädt</string>
     <string name="info">Information</string>
     <string name="kernel">Kernel</string>
