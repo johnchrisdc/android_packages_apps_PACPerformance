@@ -11,14 +11,15 @@ public class BootReceiver extends BroadcastReceiver implements Constants {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        // Check first if root is accessable and busyox is installed
-        if (!rootHelper.rootAccess() || !rootHelper.busyboxInstalled()) return;
-
         // Run set on boot
         if (mUtils.getBoolean("setonboot", false, context)) {
             String savedCommands = mUtils.getString(COMMAND_NAME, "", context);
 
             if (!savedCommands.isEmpty()) {
+
+                // Check first if root is accessable and busyox is installed
+                if (!rootHelper.rootAccess() || !rootHelper.busyboxInstalled()) return;
+
                 String[] files = savedCommands.split(mCommandControl.fileSplit);
                 for (String file : files)
                     rootHelper
@@ -36,6 +37,9 @@ public class BootReceiver extends BroadcastReceiver implements Constants {
                     mCustomCommanderFragment.prefName, "", context);
 
             if (!savedCommands.isEmpty()) {
+                // Check first if root is accessable and busyox is installed
+                if (!rootHelper.rootAccess() || !rootHelper.busyboxInstalled()) return;
+
                 for (String command : mCustomCommanderFragment
                         .getSavedCommands(savedCommands))
                     rootHelper.runCommand(command);
