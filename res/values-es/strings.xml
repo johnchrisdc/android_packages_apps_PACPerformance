@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PACPerformance</string>
+    <string name="no_root">No hay acceso Root</string>
+    <string name="no_busybox">Busybox no está instalado</string>
+    <string name="set_on_boot">Establecer en el arranque</string>
+    <string name="booted_up">%s aplicado</string>
+    <string name="loading">Cargando</string>
+    <string name="info">Información</string>
+    <string name="kernel">Kernel</string>
+    <string name="utilities">Utilidades</string>
+    <string name="parameters">Parámetros</string>
+    <string name="advanced">Avanzado</string>
+    <string name="not_tunable">%s no se puede ajustar</string>
+    <string name="add">Añadir</string>
+    <string name="empty">%s está vacío!</string>
+    <string name="delete">Eliminar</string>
+    <string name="aggressive">Agresivo</string>
+    <string name="minus">&lt;</string>
+    <string name="plus">&gt;</string>
+
+    <!-- Unidades -->
+    <string name="mhz">MHz</string>
+    <string name="kb">kB</string>
+    <string name="mb">MB</string>
+
+    <!-- Estadísticas -->
+    <string name="fancy_stats">Estadísticas</string>
+    <string name="usage">Uso</string>
+
+    <!-- Estadísticas de memoria -->
+    <string name="memory_stats">Estadísticas de memoria</string>
+    <string name="available">Disponible</string>
+    <string name="in_use">En uso</string>
+    <string name="total">Total</string>
+
+    <!-- Tiempo en el estado -->
+    <string name="time_in_state">Tiempo en el estado</string>
+    <string name="unused_cpu_states">Estados de CPU no utilizados</string>
+    <string name="total_state_time">Tiempo total utilizado</string>
+    <string name="deep_sleep">Sueño Profundo</string>
+    <string name="refresh">Actualizar</string>
+    <string name="reset_timer">Reiniciar los cronómetros</string>
+    <string name="restore_timer">Restaurar los Cronómetros</string>
+
+    <!-- Información del Kernel -->
+    <string name="kernel_info">Información del Kernel</string>
+    <string name="kernel_version">Versión del Kernel</string>
+    <string name="cpu_info">Información del CPU</string>
+    <string name="memory_info">Información de la memoria</string>
+
+    <!-- CPU -->
+    <string name="cpu">CPU</string>
+    <string name="cpu_stats">Estadísticas de CPU</string>
+    <string name="core">Nucleo %d</string>
+    <string name="offline">Desconectado</string>
+    <string name="turn_off_not_possible">No puedes desactivar núcleo %d</string>
+    <string name="cpu_max_freq">Frecuencia máxima de CPU</string>
+    <string name="cpu_min_freq">Frecuencia minima de CPU</string>
+    <string name="cpu_governor">Gobernador de CPU</string>
+    <string name="cpu_governor_tunables">Optimizar gobernador de CPU</string>
+    <string name="cpu_governor_tunables_summary">Usted puede ajustar los parámetros de CPU a su gusto</string>
+    <string name="mc_power_saving">Multinucleo, Ahorro de energía</string>
+    <string name="disabled">Desactivado</string>
+    <string name="enabled">Activado</string>
+    <string name="mc_power_saving_summary">hacer las tareas con menos núcleos</string>
+    <string name="hotplug">Hotplug</string>
+    <string name="mpdecision">MPDecision</string>
+    <string name="mpdecision_summary">QCOM\'s solución de conexión en caliente. Usted puede tener problemas con las frecuencias cambiantes cuando está habilitado</string>
+
+    <!-- GPU -->
+    <string name="gpu">GPU</string>
+    <string name="gpu_stats">Estadísticas de  GPU</string>
+    <string name="gpu_2d_cur_freq">Frecuencia actual de GPU 2D</string>
+    <string name="gpu_3d_cur_freq">Frecuencia actual de GPU 3D</string>
+    <string name="gpu_2d_max_freq">Frecuencia máxima de GPU 2D</string>
+    <string name="gpu_3d_max_freq">Frecuencia máxima de GPU 3D</string>
+    <string name="gpu_2d_governor">Gobernador de GPU 2D</string>
+    <string name="gpu_3d_governor">Gobernador de GPU 3D</string>
+
+    <!-- I/O Planificador -->
+    <string name="io_scheduler">I/O Planificador</string>
+    <string name="scheduler">Planificador</string>
+    <string name="scheduler_summary">Establecer I/O, El Planificador decide cómo manejar las peticiones de I/O</string>
+    <string name="internal_scheduler">Planificador de almacenamiento interno</string>
+    <string name="external_scheduler">Planificador de almacenamiento externo</string>
+    <string name="internal_scheduler_tunable">Configurar el Planificador de almacenamiento interno</string>
+    <string name="external_scheduler_tunable">Configurar el Planificador de almacenamiento externo</string>
+    <string name="scheduler_tunable_summary">Los diversos elementos de configuración que son dependiente del Planificador</string>
+    <string name="read_ahead">Prelectura</string>
+    <string name="read_ahead_summary">El valor Prelectura en la memoria del teléfono</string>
+    <string name="Internal_read_ahead">Prelectura de almacenamiento interno</string>
+    <string name="External_read_ahead">Prelectura de almacenamiento externo</string>
+
+    <!-- Asesino de memoria baja -->
+    <string name="low_memory_killer">Asesino de memoria baja</string>
+    <string name="forground_app">Aplicaciones de primer plano</string>
+    <string name="visbile_app">Aplicaciones visibles</string>
+    <string name="secondary_server">Servidor secundario</string>
+    <string name="hidden_app">Aplicaciones ocultas</string>
+    <string name="content_providers">Proveedores de contenido</string>
+    <string name="empty_app">Aplicaciones vacías</string>
+    <string name="profiles">Perfiles</string>
+    <string name="very_light">Muy Ligero</string>
+    <string name="light">Ligero</string>
+    <string name="medium">Medio</string>
+    <string name="very_aggressive">Muy agresivo</string>
+
+    <!-- Máquina Virtual -->
+    <string name="virtual_machine">Máquina Virtual</string>
+
+    <!-- Comandos personalizados -->
+    <string name="custom_commander">Comandos personalizados</string>
+    <string name="custom_commander_summary">Esto permite que usted agregue sus propios controles que se aplicarán después de arrancar. Usted puede agregar cualquier comando, siempre que sean capaces de funcionar en terminal también</string>
+    <string name="name">Nombre</string>
+    <string name="command">Comando</string>
+    <string name="already_exist">Un comando con el mismo nombre ya existe. Por favor, elimine o modifique el anterior</string>
+    <string name="run">Ejecutar</string>
+    <string name="edit">Editar</string>
+
+    <!-- Copia de seguridad -->
+    <string name="backup">Copia de seguridad</string>
+    <string name="backup_summary">Realizando Copia de seguridad de %s partition to internal storage.</string>
+    <string name="boot">Boot</string>
+    <string name="recovery">Recovery</string>
+    <string name="fota">FOTA</string>
+    <string name="backups">Copias de seguridad</string>
+    <string name="no_backups">No se econtraron copias de seguridad</string>
+    <string name="last_modified">Última modificación</string>
+    <string name="name_of_backup">Nombre de la copia de seguridad</string>
+    <string name="partiton_failed">Obtener Información de la partición, ha fallado</string>
+    <string name="backing_up">Copia de seguridad</string>
+    <string name="restore">Restaurar</string>
+    <string name="restoring">Restaurando</string>
+    <string name="overwrite">Esto sobreescribirá %s</string>
+
+    <!-- Build prop -->
+    <string name="build_prop">Build.prop</string>
+    <string name="done_backup">Copia de seguridad de %s realizada</string>
+    <string name="key">Clave</string>
+    <string name="value">Valor</string>
+    <string name="delete_prop">Eliminar %s?</string>
+
+</resources>
