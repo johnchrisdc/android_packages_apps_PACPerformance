@@ -16,6 +16,7 @@ import com.pac.performance.cpuspy.CpuSpyApp;
 import com.pac.performance.cpuspy.CpuStateMonitor;
 import com.pac.performance.cpuspy.CpuStateMonitor.CpuState;
 import com.pac.performance.cpuspy.CpuStateMonitor.CpuStateMonitorException;
+import com.pac.performance.utils.Constants;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -33,8 +34,7 @@ import android.widget.TextView;
 import android.util.Log;
 
 /** main activity class */
-public class TimeInStateFragment extends Fragment {
-    private static final String TAG = "CpuSpy";
+public class TimeInStateFragment extends Fragment implements Constants {
 
     private CpuSpyApp cpuSpyApp = new CpuSpyApp();
     private static Activity activity;
@@ -54,17 +54,16 @@ public class TimeInStateFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-
         setHasOptionsMenu(true);
         activity = getActivity();
+
         // inflate the view, stash the app context, and get all UI elements
         rootView = inflater.inflate(R.layout.info, container, false);
         findViews();
 
         // see if we're updating data during a config change (rotate screen)
-        if (savedInstanceState != null) {
-            _updatingData = savedInstanceState.getBoolean("updatingData");
-        }
+        if (savedInstanceState != null) _updatingData = savedInstanceState
+                .getBoolean("updatingData");
 
         return rootView;
     }
@@ -79,8 +78,8 @@ public class TimeInStateFragment extends Fragment {
     /** Update the view when the application regains focus */
     @Override
     public void onResume() {
-        super.onResume();
         refreshData();
+        super.onResume();
     }
 
     /** Map all of the UI elements to member variables */
@@ -187,9 +186,7 @@ public class TimeInStateFragment extends Fragment {
 
     /** Attempt to update the time-in-state info */
     public void refreshData() {
-        if (!_updatingData) {
-            new RefreshStateDataTask().execute((Void) null);
-        }
+        if (!_updatingData) new RefreshStateDataTask().execute((Void) null);
     }
 
     /** @return A nicely formatted String representing tSec seconds */

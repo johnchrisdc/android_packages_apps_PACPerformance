@@ -31,87 +31,92 @@ public class GPUFragment extends PreferenceFragment implements Constants {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (gpuHelper.hasGpu2dFreqs()) {
-            mAvailable2dFreqs = new String[gpuHelper.getGpu2dFreqs().length];
-            for (int i = 0; i < gpuHelper.getGpu2dFreqs().length; i++)
-                mAvailable2dFreqs[i] = (Integer.parseInt(gpuHelper
-                        .getGpu2dFreqs()[i]) / 1000000)
-                        + getString(R.string.mhz);
-        }
+        final PreferenceScreen root = getPreferenceManager()
+                .createPreferenceScreen(getActivity());
 
-        if (gpuHelper.hasGpu3dFreqs()) {
-            mAvailable3dFreqs = new String[gpuHelper.getGpu3dFreqs().length];
-            for (int i = 0; i < gpuHelper.getGpu3dFreqs().length; i++)
-                mAvailable3dFreqs[i] = (Integer.parseInt(gpuHelper
-                        .getGpu3dFreqs()[i]) / 1000000)
-                        + getString(R.string.mhz);
-        }
+        new Thread() {
+            public void run() {
+                if (gpuHelper.hasGpu2dFreqs()) {
+                    mAvailable2dFreqs = new String[gpuHelper.getGpu2dFreqs().length];
+                    for (int i = 0; i < gpuHelper.getGpu2dFreqs().length; i++)
+                        mAvailable2dFreqs[i] = (Integer.parseInt(gpuHelper
+                                .getGpu2dFreqs()[i]) / 1000000)
+                                + getString(R.string.mhz);
+                }
 
-        PreferenceScreen root = getPreferenceManager().createPreferenceScreen(
-                getActivity());
+                if (gpuHelper.hasGpu3dFreqs()) {
+                    mAvailable3dFreqs = new String[gpuHelper.getGpu3dFreqs().length];
+                    for (int i = 0; i < gpuHelper.getGpu3dFreqs().length; i++)
+                        mAvailable3dFreqs[i] = (Integer.parseInt(gpuHelper
+                                .getGpu3dFreqs()[i]) / 1000000)
+                                + getString(R.string.mhz);
+                }
 
-        if (gpuHelper.hasGpu2dCurFreq()) {
-            root.addPreference(prefHelper.setPreferenceCategory(
-                    getString(R.string.gpu_stats), getActivity()));
+                if (gpuHelper.hasGpu2dCurFreq()) {
+                    root.addPreference(prefHelper.setPreferenceCategory(
+                            getString(R.string.gpu_stats), getActivity()));
 
-            mGpu2dCurFreq = prefHelper.setPreference(
-                    getString(R.string.gpu_2d_cur_freq),
-                    (gpuHelper.getGpu2dCurFreq() / 1000000)
-                            + getString(R.string.mhz), getActivity());
+                    mGpu2dCurFreq = prefHelper.setPreference(
+                            getString(R.string.gpu_2d_cur_freq),
+                            (gpuHelper.getGpu2dCurFreq() / 1000000)
+                                    + getString(R.string.mhz), getActivity());
 
-            root.addPreference(mGpu2dCurFreq);
-        }
+                    root.addPreference(mGpu2dCurFreq);
+                }
 
-        if (gpuHelper.hasGpu3dCurFreq()) {
-            root.addPreference(prefHelper.setPreferenceCategory(
-                    getString(R.string.gpu_stats), getActivity()));
+                if (gpuHelper.hasGpu3dCurFreq()) {
+                    root.addPreference(prefHelper.setPreferenceCategory(
+                            getString(R.string.gpu_stats), getActivity()));
 
-            mGpu3dCurFreq = prefHelper.setPreference(
-                    getString(R.string.gpu_3d_cur_freq),
-                    (gpuHelper.getGpu3dCurFreq() / 1000000)
-                            + getString(R.string.mhz), getActivity());
+                    mGpu3dCurFreq = prefHelper.setPreference(
+                            getString(R.string.gpu_3d_cur_freq),
+                            (gpuHelper.getGpu3dCurFreq() / 1000000)
+                                    + getString(R.string.mhz), getActivity());
 
-            root.addPreference(mGpu3dCurFreq);
-        }
+                    root.addPreference(mGpu3dCurFreq);
+                }
 
-        if (gpuHelper.hasGpu2dMaxFreq() || gpuHelper.hasGpu2dGovernor()
-                || gpuHelper.hasGpu3dMaxFreq() || gpuHelper.hasGpu3dGovernor()) root
-                .addPreference(prefHelper.setPreferenceCategory(
-                        getString(R.string.parameters), getActivity()));
+                if (gpuHelper.hasGpu2dMaxFreq() || gpuHelper.hasGpu2dGovernor()
+                        || gpuHelper.hasGpu3dMaxFreq()
+                        || gpuHelper.hasGpu3dGovernor()) root
+                        .addPreference(prefHelper.setPreferenceCategory(
+                                getString(R.string.parameters), getActivity()));
 
-        if (gpuHelper.hasGpu2dMaxFreq()) {
-            mGpu2dMaxFreq = prefHelper.setPreference(
-                    getString(R.string.gpu_2d_max_freq),
-                    (gpuHelper.getGpu2dMaxFreq() / 1000000)
-                            + getString(R.string.mhz), getActivity());
+                if (gpuHelper.hasGpu2dMaxFreq()) {
+                    mGpu2dMaxFreq = prefHelper.setPreference(
+                            getString(R.string.gpu_2d_max_freq),
+                            (gpuHelper.getGpu2dMaxFreq() / 1000000)
+                                    + getString(R.string.mhz), getActivity());
 
-            root.addPreference(mGpu2dMaxFreq);
-        }
+                    root.addPreference(mGpu2dMaxFreq);
+                }
 
-        if (gpuHelper.hasGpu3dMaxFreq()) {
-            mGpu3dMaxFreq = prefHelper.setPreference(
-                    getString(R.string.gpu_3d_max_freq),
-                    (gpuHelper.getGpu3dMaxFreq() / 1000000)
-                            + getString(R.string.mhz), getActivity());
+                if (gpuHelper.hasGpu3dMaxFreq()) {
+                    mGpu3dMaxFreq = prefHelper.setPreference(
+                            getString(R.string.gpu_3d_max_freq),
+                            (gpuHelper.getGpu3dMaxFreq() / 1000000)
+                                    + getString(R.string.mhz), getActivity());
 
-            root.addPreference(mGpu3dMaxFreq);
-        }
+                    root.addPreference(mGpu3dMaxFreq);
+                }
 
-        if (gpuHelper.hasGpu2dGovernor()) {
-            mGpu2dGovernor = prefHelper.setPreference(
-                    getString(R.string.gpu_2d_governor),
-                    gpuHelper.getGpu2dGovernor(), getActivity());
+                if (gpuHelper.hasGpu2dGovernor()) {
+                    mGpu2dGovernor = prefHelper.setPreference(
+                            getString(R.string.gpu_2d_governor),
+                            gpuHelper.getGpu2dGovernor(), getActivity());
 
-            root.addPreference(mGpu2dGovernor);
-        }
+                    root.addPreference(mGpu2dGovernor);
+                }
 
-        if (gpuHelper.hasGpu3dGovernor()) {
-            mGpu3dGovernor = prefHelper.setPreference(
-                    getString(R.string.gpu_3d_governor),
-                    gpuHelper.getGpu3dGovernor(), getActivity());
+                if (gpuHelper.hasGpu3dGovernor()) {
+                    mGpu3dGovernor = prefHelper.setPreference(
+                            getString(R.string.gpu_3d_governor),
+                            gpuHelper.getGpu3dGovernor(), getActivity());
 
-            root.addPreference(mGpu3dGovernor);
-        }
+                    root.addPreference(mGpu3dGovernor);
+                }
+            }
+        }.start();
 
         setPreferenceScreen(root);
     }

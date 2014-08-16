@@ -27,7 +27,7 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class CpuStatsFragment extends Fragment implements Constants {
+public class CPUStatsFragment extends Fragment implements Constants {
 
     private View rootView;
     private LinearLayout layout;

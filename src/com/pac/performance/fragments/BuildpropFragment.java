@@ -61,24 +61,30 @@ public class BuildpropFragment extends Fragment implements Constants {
     }
 
     private void refresh() {
-        keys.clear();
-        values.clear();
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                keys.clear();
+                values.clear();
 
-        String[] props = mUtils.readFile(BUILD_PROP).split("\\r?\\n");
+                String[] props = mUtils.readFile(BUILD_PROP).split("\\r?\\n");
 
-        if (props.length > 1) {
-            for (String prop : props)
-                if (!prop.isEmpty() && !prop.startsWith("#")) {
-                    String[] propArray = prop.split("=");
-                    keys.add(propArray[0]);
-                    String value = propArray.length < 2 ? "" : propArray[1];
-                    values.add(value + "\n");
+                if (props.length > 1) {
+                    for (String prop : props)
+                        if (!prop.isEmpty() && !prop.startsWith("#")) {
+                            String[] propArray = prop.split("=");
+                            keys.add(propArray[0]);
+                            String value = propArray.length < 2 ? ""
+                                    : propArray[1];
+                            values.add(value + "\n");
+                        }
+
+                    ArrayAdapter<String> adapter = new GenericListView(
+                            getActivity(), keys, values);
+                    list.setAdapter(adapter);
                 }
-
-            ArrayAdapter<String> adapter = new GenericListView(getActivity(),
-                    keys, values);
-            list.setAdapter(adapter);
-        }
+            }
+        });
     }
 
     private void backup() {

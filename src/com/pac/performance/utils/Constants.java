@@ -5,8 +5,9 @@ import android.os.Environment;
 import com.pac.performance.fragments.BackupFragment;
 import com.pac.performance.fragments.BuildpropFragment;
 import com.pac.performance.fragments.CPUFragment;
+import com.pac.performance.fragments.CPUVoltageFragment;
 import com.pac.performance.fragments.CustomCommanderFragment;
-import com.pac.performance.fragments.CpuStatsFragment;
+import com.pac.performance.fragments.CPUStatsFragment;
 import com.pac.performance.fragments.GPUFragment;
 import com.pac.performance.fragments.IOSchedulerFragment;
 import com.pac.performance.fragments.KernelInformationFragment;
@@ -15,6 +16,7 @@ import com.pac.performance.fragments.MemoryStatsFragment;
 import com.pac.performance.fragments.TimeInStateFragment;
 import com.pac.performance.fragments.VirtualMachineFragment;
 import com.pac.performance.helpers.CPUHelper;
+import com.pac.performance.helpers.CPUVoltageHelper;
 import com.pac.performance.helpers.GPUHelper;
 import com.pac.performance.helpers.IOHelper;
 import com.pac.performance.helpers.LowMemoryKillerHelper;
@@ -43,7 +45,8 @@ public interface Constants {
     public final BackupFragment mBackupFragment = new BackupFragment();
     public final BuildpropFragment mBuildpropFragment = new BuildpropFragment();
     public final CPUFragment mCPUFragment = new CPUFragment();
-    public final CpuStatsFragment mCpuStatsFragment = new CpuStatsFragment();
+    public final CPUStatsFragment mCPUStatsFragment = new CPUStatsFragment();
+    public final CPUVoltageFragment mCPUVoltageFragment = new CPUVoltageFragment();
     public final CustomCommanderFragment mCustomCommanderFragment = new CustomCommanderFragment();
     public final GPUFragment mGPUFragment = new GPUFragment();
     public final KernelInformationFragment mKernelInformationFragment = new KernelInformationFragment();
@@ -58,6 +61,7 @@ public interface Constants {
     public final Utils mUtils = new Utils();
 
     public final CPUHelper cpuHelper = new CPUHelper();
+    public final CPUVoltageHelper cpuVoltageHelper = new CPUVoltageHelper();
     public final GPUHelper gpuHelper = new GPUHelper();
     public final IOHelper ioHelper = new IOHelper();
     public final LowMemoryKillerHelper lowmemorykillerHelper = new LowMemoryKillerHelper();
@@ -68,6 +72,7 @@ public interface Constants {
     public final String PARTITON_PATH = "/dev/block/platform";
     public final String BUILD_PROP = "/system/build.prop";
 
+    // CPU
     public final String CPU_CUR_FREQ = "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_cur_freq";
     public final String CPU_CORE_ONLINE = "/sys/devices/system/cpu/cpu%d/online";
     public final String CPU_MAX_FREQ = "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_max_freq";
@@ -80,6 +85,10 @@ public interface Constants {
     public final String CPU_MPDECISION_BINARY = "/system/bin/mpdecision";
     public final String CPU_MPDEC = "mpdecision";
 
+    // CPU Voltage
+    public final String CPU_VOLTAGE = "/sys/devices/system/cpu/cpu%d/cpufreq/UV_mV_table";
+
+    // GPU
     public final String GPU_GENERIC_GOVERNORS = "performance powersave ondemand simple";
 
     public final String GPU_CUR_KGSL2D0_QCOM_FREQ = "/sys/devices/platform/kgsl-2d0.0/kgsl/kgsl-2d0/gpuclk";
@@ -127,6 +136,7 @@ public interface Constants {
             GPU_3D_MAX_FREQ_ARRAY, GPU_3D_AVAILABLE_FREQS_ARRAY,
             GPU_3D_SCALING_GOVERNOR_ARRAY };
 
+    // I/O
     public final String IO_INTERNAL_SCHEDULER = "/sys/block/mmcblk0/queue/scheduler";
     public final String IO_EXTERNAL_SCHEDULER = "/sys/block/mmcblk1/queue/scheduler";
     public final String IO_INTERNAL_SCHEDULER_TUNABLE = "/sys/block/mmcblk0/queue/iosched";
@@ -134,8 +144,10 @@ public interface Constants {
     public final String IO_INTERNAL_READ_AHEAD = "/sys/block/mmcblk0/queue/read_ahead_kb";
     public final String IO_EXTERNAL_READ_AHEAD = "/sys/block/mmcblk1/queue/read_ahead_kb";
 
+    // Low Memory Killer
     public final String LMK_MINFREE = "/sys/module/lowmemorykiller/parameters/minfree";
 
+    // Virtual Machine
     public final String VM_PATH = "/proc/sys/vm";
 
     public final String TMP_FILE = "/data/local/tmp/pacperformance.tmp";

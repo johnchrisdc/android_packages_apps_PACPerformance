@@ -8,7 +8,6 @@
 
     <TextView
         android:id="@+id/text_value"
-        style="?android:attr/listSeparatorTextViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center" />
@@ -21,7 +20,7 @@
         <Button
             android:id="@+id/button_minus"
             style="@style/ButtonBar"
-            android:layout_width="wrap_content"
+            android:layout_width="34dp"
             android:layout_height="wrap_content"
             android:text="@string/minus" />
 
@@ -35,7 +34,7 @@
         <Button
             android:id="@+id/button_plus"
             style="@style/ButtonBar"
-            android:layout_width="wrap_content"
+            android:layout_width="34dp"
             android:layout_height="wrap_content"
             android:text="@string/plus" />
     </LinearLayout>

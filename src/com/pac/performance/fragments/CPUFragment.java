@@ -32,86 +32,95 @@ public class CPUFragment extends PreferenceFragment implements Constants {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        PreferenceScreen root = getPreferenceManager().createPreferenceScreen(
-                getActivity());
+        final PreferenceScreen root = getPreferenceManager()
+                .createPreferenceScreen(getActivity());
 
-        mAvailableFreqs = new String[cpuHelper.getCpuFreqs().length];
-        for (int i = 0; i < cpuHelper.getCpuFreqs().length; i++)
-            mAvailableFreqs[i] = (Integer.parseInt(cpuHelper.getCpuFreqs()[i]) / 1000)
-                    + getString(R.string.mhz);
+        new Thread() {
+            public void run() {
+                mAvailableFreqs = new String[cpuHelper.getCpuFreqs().length];
+                for (int i = 0; i < cpuHelper.getCpuFreqs().length; i++)
+                    mAvailableFreqs[i] = (Integer.parseInt(cpuHelper
+                            .getCpuFreqs()[i]) / 1000)
+                            + getString(R.string.mhz);
 
-        root.addPreference(prefHelper.setPreferenceCategory(
-                getString(R.string.cpu_stats), getActivity()));
+                root.addPreference(prefHelper.setPreferenceCategory(
+                        getString(R.string.cpu_stats), getActivity()));
 
-        mCoreBoxes = new CheckBoxPreference[cpuHelper.getCoreCount()];
-        for (int i = 0; i < cpuHelper.getCoreCount(); i++) {
-            final int mCoreFreq = cpuHelper.getCurFreq(i);
-            mCoreBoxes[i] = prefHelper.setCheckBoxPreference(
-                    mCoreFreq != 0,
-                    getString(R.string.core, i),
-                    mCoreFreq == 0 ? getString(R.string.offline) : String
-                            .valueOf(mCoreFreq / 1000)
-                            + getString(R.string.mhz), getActivity());
-            root.addPreference(mCoreBoxes[i]);
-        }
+                mCoreBoxes = new CheckBoxPreference[cpuHelper.getCoreCount()];
+                for (int i = 0; i < cpuHelper.getCoreCount(); i++) {
+                    final int mCoreFreq = cpuHelper.getCurFreq(i);
+                    mCoreBoxes[i] = prefHelper.setCheckBoxPreference(
+                            mCoreFreq != 0, getString(R.string.core, i),
+                            mCoreFreq == 0 ? getString(R.string.offline)
+                                    : String.valueOf(mCoreFreq / 1000)
+                                            + getString(R.string.mhz),
+                            getActivity());
+                    root.addPreference(mCoreBoxes[i]);
+                }
 
-        root.addPreference(prefHelper.setPreferenceCategory(
-                getString(R.string.parameters), getActivity()));
+                root.addPreference(prefHelper.setPreferenceCategory(
+                        getString(R.string.parameters), getActivity()));
 
-        mCpuMaxScaling = prefHelper.setPreference(
-                getString(R.string.cpu_max_freq),
-                (cpuHelper.getMaxFreq(0) / 1000) + getString(R.string.mhz),
-                getActivity());
+                mCpuMaxScaling = prefHelper.setPreference(
+                        getString(R.string.cpu_max_freq),
+                        (cpuHelper.getMaxFreq(0) / 1000)
+                                + getString(R.string.mhz), getActivity());
 
-        root.addPreference(mCpuMaxScaling);
+                root.addPreference(mCpuMaxScaling);
 
-        mCpuMinScaling = prefHelper.setPreference(
-                getString(R.string.cpu_min_freq),
-                (cpuHelper.getMinFreq(0) / 1000) + getString(R.string.mhz),
-                getActivity());
+                mCpuMinScaling = prefHelper.setPreference(
+                        getString(R.string.cpu_min_freq),
+                        (cpuHelper.getMinFreq(0) / 1000)
+                                + getString(R.string.mhz), getActivity());
 
-        root.addPreference(mCpuMinScaling);
+                root.addPreference(mCpuMinScaling);
 
-        mGovernorScaling = prefHelper.setPreference(
-                getString(R.string.cpu_governor), cpuHelper.getGovernor(0),
-                getActivity());
+                mGovernorScaling = prefHelper.setPreference(
+                        getString(R.string.cpu_governor),
+                        cpuHelper.getGovernor(0), getActivity());
 
-        root.addPreference(mGovernorScaling);
+                root.addPreference(mGovernorScaling);
 
-        root.addPreference(prefHelper.setPreferenceCategory(
-                getString(R.string.advanced), getActivity()));
+                root.addPreference(prefHelper.setPreferenceCategory(
+                        getString(R.string.advanced), getActivity()));
 
-        mGovernorTunables = prefHelper.setPreference(
-                getString(R.string.cpu_governor_tunables),
-                getString(R.string.cpu_governor_tunables_summary),
-                getActivity());
+                mGovernorTunables = prefHelper.setPreference(
+                        getString(R.string.cpu_governor_tunables),
+                        getString(R.string.cpu_governor_tunables_summary),
+                        getActivity());
 
-        root.addPreference(mGovernorTunables);
+                root.addPreference(mGovernorTunables);
 
-        if (cpuHelper.hasMcPowerSaving()) {
-            mMcPowerSaving = prefHelper.setPreference(
-                    getString(R.string.mc_power_saving),
-                    getString(R.string.mc_power_saving_summary)
-                            + ": "
-                            + getResources().getStringArray(
-                                    R.array.mc_power_saving_items)[cpuHelper
-                                    .getMcPowerSaving()], getActivity());
+                if (cpuHelper.hasMcPowerSaving()) {
+                    mMcPowerSaving = prefHelper
+                            .setPreference(
+                                    getString(R.string.mc_power_saving),
+                                    getString(R.string.mc_power_saving_summary)
+                                            + ": "
+                                            + getResources()
+                                                    .getStringArray(
+                                                            R.array.mc_power_saving_items)[cpuHelper
+                                                    .getMcPowerSaving()],
+                                    getActivity());
 
-            root.addPreference(mMcPowerSaving);
-        }
+                    root.addPreference(mMcPowerSaving);
+                }
 
-        if (cpuHelper.hasMpdecision()) root.addPreference(prefHelper
-                .setPreferenceCategory(getString(R.string.hotplug),
-                        getActivity()));
+                if (cpuHelper.hasMpdecision()) root.addPreference(prefHelper
+                        .setPreferenceCategory(getString(R.string.hotplug),
+                                getActivity()));
 
-        if (cpuHelper.hasMpdecision()) {
-            mMpdecision = prefHelper.setCheckBoxPreference(
-                    cpuHelper.isMpdecisionActive(),
-                    getString(R.string.mpdecision),
-                    getString(R.string.mpdecision_summary), getActivity());
+                if (cpuHelper.hasMpdecision()) {
+                    mMpdecision = prefHelper.setCheckBoxPreference(
+                            cpuHelper.isMpdecisionActive(),
+                            getString(R.string.mpdecision),
+                            getString(R.string.mpdecision_summary),
+                            getActivity());
 
-            root.addPreference(mMpdecision);
-        }
+                    root.addPreference(mMpdecision);
+                }
+            }
+        }.start();
 
         setPreferenceScreen(root);
     }
@@ -210,25 +219,31 @@ public class CPUFragment extends PreferenceFragment implements Constants {
     Runnable run = new Runnable() {
         @Override
         public void run() {
-            for (int i = 0; i < cpuHelper.getCoreCount(); i++) {
-                final int mCoreFreq = cpuHelper.getCurFreq(i);
-                if (mCoreBoxes != null) {
-                    mCoreBoxes[i]
-                            .setSummary(mCoreFreq == 0 ? getString(R.string.offline)
-                                    : String.valueOf(mCoreFreq / 1000)
-                                            + getString(R.string.mhz));
-                    mCoreBoxes[i].setChecked(mCoreFreq != 0);
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    for (int i = 0; i < cpuHelper.getCoreCount(); i++) {
+                        final int mCoreFreq = cpuHelper.getCurFreq(i);
+                        if (mCoreBoxes != null) {
+                            mCoreBoxes[i]
+                                    .setSummary(mCoreFreq == 0 ? getString(R.string.offline)
+                                            : String.valueOf(mCoreFreq / 1000)
+                                                    + getString(R.string.mhz));
+                            mCoreBoxes[i].setChecked(mCoreFreq != 0);
+                        }
+                    }
+
+                    if (mCpuMaxScaling != null && mCpuMinScaling != null) {
+                        mCpuMaxScaling.setSummary((cpuHelper.getMaxFreq(0) / 1000)
+                                + getString(R.string.mhz));
+                        mCpuMinScaling.setSummary((cpuHelper.getMinFreq(0) / 1000)
+                                + getString(R.string.mhz));
+                    }
+
+                    hand.postDelayed(run, 500);
                 }
-            }
+            });
 
-            if (mCpuMaxScaling != null && mCpuMinScaling != null) {
-                mCpuMaxScaling.setSummary((cpuHelper.getMaxFreq(0) / 1000)
-                        + getString(R.string.mhz));
-                mCpuMinScaling.setSummary((cpuHelper.getMinFreq(0) / 1000)
-                        + getString(R.string.mhz));
-            }
-
-            hand.postDelayed(run, 500);
         }
     };
 

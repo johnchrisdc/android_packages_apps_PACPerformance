@@ -162,4 +162,10 @@ public class GPUHelper implements Constants {
         return GPU_3D_CUR_FREQ != null;
     }
 
+    public boolean hasGpu() {
+        for (String[] files : GPU_ARRAY)
+            for (String file : files)
+                if (mUtils.existFile(file)) return true;
+        return false;
+    }
 }

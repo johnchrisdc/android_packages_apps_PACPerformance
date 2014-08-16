@@ -16,11 +16,12 @@ public class KernelInformationFragment extends Fragment implements Constants {
 
     @SuppressWarnings("deprecation")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater,
+            final ViewGroup container, Bundle savedInstanceState) {
 
-        ScrollView scroll = new ScrollView(getActivity());
-        LinearLayout layout = new LinearLayout(getActivity());
+        final ScrollView scroll = new ScrollView(getActivity());
+
+        final LinearLayout layout = new LinearLayout(getActivity());
         layout.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.FILL_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -28,35 +29,38 @@ public class KernelInformationFragment extends Fragment implements Constants {
         layout.setPadding(10, 0, 10, 0);
         scroll.addView(layout);
 
-        TextView header = (TextView) inflater.inflate(R.layout.list_header,
-                container, false);
+        final TextView header = (TextView) inflater.inflate(
+                R.layout.list_header, container, false);
+        final TextView kernelVersion = new TextView(getActivity());
+        final TextView header1 = (TextView) inflater.inflate(
+                R.layout.list_header, container, false);
+        final TextView cpuInfo = new TextView(getActivity());
+        final TextView header2 = (TextView) inflater.inflate(
+                R.layout.list_header, container, false);
+        final TextView memInfo = new TextView(getActivity());
 
-        header.setText(getString(R.string.kernel_version));
         layout.addView(header);
-
-        TextView kernelVersion = new TextView(getActivity());
-        kernelVersion.setText(mUtils.readFile(PROC_VERSION));
         layout.addView(kernelVersion);
-
-        TextView header1 = (TextView) inflater.inflate(R.layout.list_header,
-                container, false);
-
-        header1.setText(getString(R.string.cpu_info));
         layout.addView(header1);
-
-        TextView cpuInfo = new TextView(getActivity());
-        cpuInfo.setText(mUtils.readFile(PROC_CPUINFO));
         layout.addView(cpuInfo);
-
-        TextView header2 = (TextView) inflater.inflate(R.layout.list_header,
-                container, false);
-
-        header2.setText(getString(R.string.memory_info));
         layout.addView(header2);
-
-        TextView memInfo = new TextView(getActivity());
-        memInfo.setText(mUtils.readFile(PROC_MEMINFO));
         layout.addView(memInfo);
+
+        new Thread() {
+            public void run() {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        header.setText(getString(R.string.kernel_version));
+                        kernelVersion.setText(mUtils.readFile(PROC_VERSION));
+                        header1.setText(getString(R.string.cpu_info));
+                        cpuInfo.setText(mUtils.readFile(PROC_CPUINFO));
+                        header2.setText(getString(R.string.memory_info));
+                        memInfo.setText(mUtils.readFile(PROC_MEMINFO));
+                    }
+                });
+            }
+        }.start();
 
         return scroll;
     }

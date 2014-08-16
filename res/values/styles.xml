@@ -19,8 +19,6 @@
 
     <style name="ButtonBar" parent="@android:style/Widget.ActionButton">
         <item name="android:layout_height">15dp</item>
-        <item name="android:textSize">30sp</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/btn_action</item>
     </style>
 

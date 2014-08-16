@@ -24,9 +24,9 @@ public class VirtualMachineFragment extends PreferenceFragment implements
         mVMs = new Preference[virtualmachineHelper.getVMfiles().size()];
         for (int i = 0; i < virtualmachineHelper.getVMfiles().size(); i++) {
             mVMs[i] = prefHelper.setPreference(virtualmachineHelper
-                    .getVMfiles().get(i), virtualmachineHelper
-                    .getVMValue(virtualmachineHelper.getVMfiles().get(i)),
-                    getActivity());
+                    .getVMfiles().get(i).replace("_", " "),
+                    virtualmachineHelper.getVMValue(virtualmachineHelper
+                            .getVMfiles().get(i)), getActivity());
 
             root.addPreference(mVMs[i]);
         }
@@ -46,7 +46,7 @@ public class VirtualMachineFragment extends PreferenceFragment implements
                 public void dialogReturn(String value) {
                     preference.setSummary(value);
                 }
-            }, CommandType.GENERIC, getActivity());
+            }, true, 0, CommandType.GENERIC, getActivity());
 
         return true;
     }

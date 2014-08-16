@@ -36,8 +36,8 @@ public class Dialog implements Constants {
     }
 
     public void showDialogGeneric(final String file, String value,
-            final DialogReturn dialogreturn, final CommandType command,
-            final Activity activity) {
+            final DialogReturn dialogreturn, final boolean apply, int input,
+            final CommandType command, final Activity activity) {
 
         LinearLayout layout = new LinearLayout(activity);
         layout.setOrientation(LinearLayout.VERTICAL);
@@ -46,6 +46,8 @@ public class Dialog implements Constants {
         final EditText editor = new EditText(activity);
         editor.setGravity(Gravity.CENTER);
         editor.setText(value);
+
+        if (input != 0) editor.setInputType(input);
 
         layout.addView(editor);
 
@@ -60,8 +62,8 @@ public class Dialog implements Constants {
                 .setPositiveButton(android.R.string.ok, new OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        mCommandControl.runCommand(editor.getText().toString(),
-                                file, command, activity);
+                        if (apply) mCommandControl.runCommand(editor.getText()
+                                .toString(), file, command, activity);
                         dialogreturn.dialogReturn(editor.getText().toString());
                     }
                 }).show();

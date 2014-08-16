@@ -24,6 +24,7 @@
     <string name="mhz">MHz</string>
     <string name="kb">kB</string>
     <string name="mb">MB</string>
+    <string name="mv">mV</string>
 
     <!-- Fancy Stats -->
     <string name="fancy_stats">Fancy Stats</string>
@@ -68,6 +69,9 @@
     <string name="hotplug">Hotplug</string>
     <string name="mpdecision">MPDecision</string>
     <string name="mpdecision_summary">QCOM\'s hotplugging solution. You might get problems with changing frequencies when this is enabled.</string>
+
+    <!-- CPU Voltage -->
+    <string name="cpu_voltage">CPU Voltage</string>
 
     <!-- GPU -->
     <string name="gpu">GPU</string>
