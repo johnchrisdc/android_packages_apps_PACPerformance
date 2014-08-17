@@ -153,17 +153,17 @@ public class BuildpropFragment extends Fragment implements Constants {
         new Thread() {
             public void run() {
                 try {
-                    rootHelper.runCommand("rm -f /cache/tmp");
+                    rootHelper.runCommand("rm -f " + Constants.TMP_FILE);
                     rootHelper.mount(true, "/system");
                     Thread.sleep(10);
                     rootHelper.runCommand("echo " + key + "=" + value + " >> "
                             + BUILD_PROP);
                     rootHelper.mount(false, "/system");
                     // Create a tmp file so we know when it is finished
-                    rootHelper.runCommand("touch /cache/tmp");
+                    rootHelper.runCommand("touch " + Constants.TMP_FILE);
                     while (true) {
-                        if (mUtils.existFile("/cache/tmp")) {
-                            rootHelper.runCommand("rm -f /cache/tmp");
+                        if (mUtils.existFile(Constants.TMP_FILE)) {
+                            rootHelper.runCommand("rm -f " + Constants.TMP_FILE);
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -185,7 +185,7 @@ public class BuildpropFragment extends Fragment implements Constants {
         new Thread() {
             public void run() {
                 try {
-                    rootHelper.runCommand("rm -f /cache/tmp");
+                    rootHelper.runCommand("rm -f " + Constants.TMP_FILE);
                     rootHelper.mount(true, "/system");
                     Thread.sleep(10);
                     /*
@@ -197,10 +197,10 @@ public class BuildpropFragment extends Fragment implements Constants {
                             + "|g' -i /system/build.prop");
                     rootHelper.mount(false, "/system");
                     // Create a tmp file so we know when it is finished
-                    rootHelper.runCommand("touch /cache/tmp");
+                    rootHelper.runCommand("touch " + Constants.TMP_FILE);
                     while (true) {
-                        if (mUtils.existFile("/cache/tmp")) {
-                            rootHelper.runCommand("rm -f /cache/tmp");
+                        if (mUtils.existFile(Constants.TMP_FILE)) {
+                            rootHelper.runCommand("rm -f " + Constants.TMP_FILE);
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {

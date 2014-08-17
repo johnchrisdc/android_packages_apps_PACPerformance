@@ -137,4 +137,6 @@ public interface Constants {
     public final String LMK_MINFREE = "/sys/module/lowmemorykiller/parameters/minfree";
 
     public final String VM_PATH = "/proc/sys/vm";
+
+    public final String TMP_FILE = "/data/local/tmp/pacperformance.tmp";
 }

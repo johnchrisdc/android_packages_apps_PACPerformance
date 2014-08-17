@@ -183,7 +183,7 @@ public class BackupFragment extends PreferenceFragment implements Constants {
 
         new Thread() {
             public void run() {
-                rootHelper.runCommand("rm -f /cache/tmp");
+                rootHelper.runCommand("rm -f " + Constants.TMP_FILE);
                 rootHelper.getPartition(
                 /*
                  * On device it is only possible /sdcard as external path when
@@ -192,10 +192,10 @@ public class BackupFragment extends PreferenceFragment implements Constants {
                 PAC_BACKUP.replace(EXTERNAL_STORAGE_DIRECTORY, "/sdcard") + "/"
                         + name, partition);
                 // Create a tmp file so we know when it is finished
-                rootHelper.runCommand("touch /cache/tmp");
+                rootHelper.runCommand("touch " + Constants.TMP_FILE);
                 while (true) {
-                    if (mUtils.existFile("/cache/tmp")) {
-                        rootHelper.runCommand("rm -f /cache/tmp");
+                    if (mUtils.existFile(Constants.TMP_FILE)) {
+                        rootHelper.runCommand("rm -f " + Constants.TMP_FILE);
                         dialog.dismiss();
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
@@ -276,7 +276,7 @@ public class BackupFragment extends PreferenceFragment implements Constants {
 
         new Thread() {
             public void run() {
-                rootHelper.runCommand("rm -f /cache/tmp");
+                rootHelper.runCommand("rm -f " + Constants.TMP_FILE);
                 rootHelper.writePartition(
                 /*
                  * On device it is only possible /sdcard as external path when
@@ -285,10 +285,10 @@ public class BackupFragment extends PreferenceFragment implements Constants {
                 PAC_BACKUP.replace(EXTERNAL_STORAGE_DIRECTORY, "/sdcard") + "/"
                         + name, partition);
                 // Create a tmp file so we know when it is finished
-                rootHelper.runCommand("touch /cache/tmp");
+                rootHelper.runCommand("touch " + Constants.TMP_FILE);
                 while (true) {
-                    if (mUtils.existFile("/cache/tmp")) {
-                        rootHelper.runCommand("rm -f /cache/tmp");
+                    if (mUtils.existFile(Constants.TMP_FILE)) {
+                        rootHelper.runCommand("rm -f " + Constants.TMP_FILE);
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

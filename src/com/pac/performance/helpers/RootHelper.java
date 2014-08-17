@@ -32,8 +32,8 @@ public class RootHelper implements Constants {
         try {
             RootTools.getShell(true).add(new CommandCapture(0, command))
                     .commandCompleted(0, 0);
-            if (command.contains("/cache/tmp")) RootTools.getShell(true)
-                    .add(new CommandCapture(0, "chmod 777 /cache"))
+            if (command.contains(Constants.TMP_FILE)) RootTools.getShell(true)
+                    .add(new CommandCapture(0, "chmod 777 " + Constants.TMP_FILE))
                     .commandCompleted(0, 0);
             Log.d(TAG, command);
         } catch (IOException e) {

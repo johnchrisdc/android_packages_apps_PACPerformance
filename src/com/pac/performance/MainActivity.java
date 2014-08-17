@@ -212,11 +212,17 @@ public class MainActivity extends Activity implements Constants {
 
         @Override
         protected void onPostExecute(Bundle result) {
+            /* TODO: cover all cores when setting file permissions.
+             * This provides coverage only for the first CPU, which
+             * may or may not be sufficient depending on the device.
+             */
             String[] files = { String.format(CPU_MAX_FREQ, 0),
-                    String.format(CPU_MIN_FREQ, 0),
-                    String.format(CPU_SCALING_GOVERNOR, 0) };
+                    String.format(CPU_MIN_FREQ, 0) };
+            String govFile = String.format(CPU_SCALING_GOVERNOR, 0);
+
             for (String file : files)
-                rootHelper.runCommand("chmod 777 " + file);
+                rootHelper.runCommand("chmod 444 " + file);
+            rootHelper.runCommand("chmod 664 " + govFile);
 
             setFragments();
             setDrawer();
